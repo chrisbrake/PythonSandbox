@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import logging
-from time import sleep, time
+from time import time
 
 logger = logging.getLogger(__name__)
 
@@ -27,20 +27,3 @@ def debugify(method):
             return return_value
 
     return debugger
-
-if __name__ == '__main__':
-    logging.basicConfig(format='%(asctime)s %(message)s')
-
-    @debugify
-    def test_debugger(*args, **kwargs):
-        sleep(1)
-        return 'A', 42
-
-
-    logger.setLevel(logging.INFO)
-    logger.info('Log level set to info.')
-    test_debugger("one", 2, three=3)
-
-    logger.setLevel(logging.DEBUG)
-    logger.info('Log level set to debug.')
-    test_debugger("one", 2,  three=3)
