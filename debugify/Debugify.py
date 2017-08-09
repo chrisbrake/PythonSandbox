@@ -12,13 +12,12 @@ def debugify(method):
     a method without directly modifying it's code, or behavior.
 
     :param method: The method that was decorated.
-    :return: The unmodified return value of methodToDebug
+    :return: The wrapped method
     """
     def debugger(*args, **kwargs):
         if not logger.isEnabledFor(logging.DEBUG):
             return method(*args, **kwargs)
         else:
-
             start = time()
             return_value = method(*args, **kwargs)
             end = time()
