@@ -2,6 +2,10 @@ import logging
 import sys
 import unittest
 
+from hypothesis import given
+from hypothesis.strategies import dictionaries, text, tuples
+
+
 sys.path.append('../')
 from debugify import debugify
 
@@ -12,25 +16,20 @@ logging.basicConfig(format='%(asctime)s %(message)s')
 
 @debugify
 def method_to_debug(*args, **kwargs):
-    if args and not kwargs:
-        return args
-    elif kwargs and not args:
-        return kwargs
-    else:
-        return args, kwargs
+    return args, kwargs
 
 
 class TestDebugify(unittest.TestCase):
     """Unit tests for the debugify module"""
 
-    def test_return(self):
+    @given(args=tuples(text()), kwargs=dictionaries(keys=text(), values=text()))
+    def test_return(self, args, kwargs):
         """Confirm the return value is not modified by the process"""
-        args = ('a', 'b', 'c', 1, 2, 3)
-        kwargs = {'a': 1, 'b': 2, 'c':3}
         for log_level in [i*10 for i in range(0, 6)]:
             logger.setLevel(log_level)
-            self.assertTupleEqual(args, method_to_debug(*args))
-            self.assertDictEqual(kwargs, method_to_debug(**kwargs))
+            self.assertTupleEqual((args, kwargs),
+                                  method_to_debug(*args, **kwargs))
+
 
 if __name__ == '__main__':
     unittest.main()
