@@ -15,15 +15,15 @@ def debugify(method):
     :return: The wrapped method
     """
     def debugger(*args, **kwargs):
-        if not logger.isEnabledFor(logging.DEBUG):
-            return method(*args, **kwargs)
-        else:
+        if logger.isEnabledFor(logging.DEBUG):
             start = time()
             return_value = method(*args, **kwargs)
             end = time()
             elapsed = (end - start) * 1000
-            logger.debug('%s(%s%s) -> %s Took %.2f msec.' % (
-                method.__name__, args, kwargs, return_value, elapsed))
+            logger.debug('%s(%s%s) -> %.2f msec -> %s' % (
+                method.__name__, args, kwargs, elapsed, return_value))
             return return_value
+        else:
+            return method(*args, **kwargs)
 
     return debugger
