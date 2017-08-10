@@ -2,7 +2,7 @@ import logging
 import sys
 import unittest
 
-from hypothesis import given
+from hypothesis import given, settings
 from hypothesis.strategies import dictionaries, text, tuples
 
 sys.path.append('../')
@@ -22,6 +22,7 @@ class TestDebugify(unittest.TestCase):
     """Unit tests for the debugify module"""
 
     @given(args=tuples(text()), kwargs=dictionaries(keys=text(), values=text()))
+    @settings(max_examples=100)
     def test_return(self, args, kwargs):
         """Confirm the return value is not modified by the process"""
         for log_level in range(0, 51, 10):
