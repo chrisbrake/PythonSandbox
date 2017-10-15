@@ -22,5 +22,6 @@ class TestImportFail(TestCase):
         with self.assertRaises(NotImplementedError):
             impossible()
 
+
 if __name__ == '__main__':
     main()
