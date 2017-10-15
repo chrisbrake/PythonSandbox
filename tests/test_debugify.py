@@ -30,5 +30,6 @@ class TestDebugify(unittest.TestCase):
             self.assertTupleEqual((args, kwargs),
                                   method_to_debug(*args, **kwargs))
 
+
 if __name__ == '__main__':
     unittest.main()
