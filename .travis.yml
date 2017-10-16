@@ -1,5 +1,9 @@
 sudo: false
 
+notfications:
+  email:
+    on_success: always
+
 language: python
 
 python:
