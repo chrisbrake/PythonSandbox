@@ -3,6 +3,9 @@ sudo: false
 notfications:
   email:
     on_success: always
+  irc:
+    channels:
+      - "chat.freenode.net#cignature"
 
 language: python
 
