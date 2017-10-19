@@ -3,13 +3,13 @@ sudo: false
 notfications:
   email:
     on_success: always
-  irc:
+    on_failure: always
+  pushover:
     on_success: always
     on_failure: always
-    use_notice: false
-    skip_join: false
-    channels:
-      - "chat.freenode.net#cignature"
+    api_key: a2d9pgrzf85a9obtt8mypn4ch3wew9
+    users:
+      - g8dir6o3fif7hvvb48fxgyhk89urqi
 
 language: python
 
