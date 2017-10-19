@@ -4,6 +4,10 @@ notfications:
   email:
     on_success: always
   irc:
+    on_success: always
+    on_failure: always
+    use_notice: false
+    skip_join: false
     channels:
       - "chat.freenode.net#cignature"
 
