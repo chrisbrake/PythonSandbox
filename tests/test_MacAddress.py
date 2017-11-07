@@ -45,6 +45,11 @@ class TestMacAddress(TestCase):
             self.assertNotEqual(Mac('AAAA.AAAA.AAAA'), Mac(mac_format))
 
     def test_string(self):
-        """Confirm that the string method is functioning as expected."""
+        """Confirm that the __str__ method is functioning as expected."""
         for mac_format in self.supported_formats:
             self.assertEqual(self.mac_dash_delimited, str(Mac(mac_format)))
+
+    def test_representation(self):
+        """Confirm that the __repr__ method is functioning as expected."""
+        for mac_format in self.supported_formats:
+            self.assertEqual(self.mac_no_delimiter, repr(Mac(mac_format)))

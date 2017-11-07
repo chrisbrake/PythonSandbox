@@ -30,21 +30,28 @@ class Mac(object):
             Any delimiters will be discarded.
         """
         self.mac = self.sanitise_mac(mac_raw)
-        self.delimiter = '-'
-        self.group_len = 2
-        self.__mac_as_string = str()
+        self.__mac_string = str()
+        self.__mac_repr = str()
 
     def __str__(self):
         """
         Construct and return a string representation of the stored mac address.
         :return: String, mac formatted as FF-FF-FF-FF-FF-FF
         """
-        if not self.__mac_as_string:
-            self.__mac_as_string = self.delimiter.join(
-                [even + odd for even, odd in zip(self.mac[0::self.group_len],
-                                                 self.mac[1::self.group_len])]
-            )
-        return self.__mac_as_string
+        if not self.__mac_string:
+            self.__mac_string = '-'.join([
+                even + odd for even, odd in zip(self.mac[0::2], self.mac[1::2])
+            ])
+        return self.__mac_string
+
+    def __repr__(self):
+        """
+        Construct and return a string representation of the stored mac address.
+        :return: String, mac formatted as FFFFFFFFFFFF
+        """
+        if not self.__mac_repr:
+            self.__mac_repr = ''.join(self.mac)
+        return self.__mac_repr
 
     def __eq__(self, other):
         """
