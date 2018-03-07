@@ -4,7 +4,7 @@ import shelve
 import threading
 import time
 
-thread_lock = threading.Lock()
+store_thread_lock = threading.Lock()
 
 
 def get_exclusive_lock(file_handle, timeout=None):
@@ -50,7 +50,7 @@ def put(name, item, file_store):
     """
     with open(file_store, 'r') as f:
         get_exclusive_lock(f, timeout=1)
-        with thread_lock:
+        with store_thread_lock:
             s = shelve.open(file_store)
             s[name] = item
             s.close()
