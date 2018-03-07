@@ -1,7 +1,10 @@
 import errno
 import fcntl
 import shelve
+import threading
 import time
+
+thread_lock = threading.Lock()
 
 
 def get_exclusive_lock(file_handle, timeout=None):
@@ -27,6 +30,15 @@ def get_exclusive_lock(file_handle, timeout=None):
     raise IOError(errno.EAGAIN, 'Could not get file lock')
 
 
+def release_exclusive_lock(file_handle):
+    """
+    Release exclusive lock
+    :param file_handle: The open file you want to release the exclusive lock on.
+    :return: None
+    """
+    fcntl.flock(file_handle, fcntl.LOCK_UN)
+
+
 def put(name, item, file_store):
     """
     Adds, or updates an item
@@ -36,9 +48,13 @@ def put(name, item, file_store):
     :return: None
     :raise: IOError if we cannot write to the file
     """
-    with shelve.open(file_store) as f:
+    with open(file_store, 'r') as f:
         get_exclusive_lock(f, timeout=1)
-        f[name] = item
+        with thread_lock:
+            s = shelve.open(file_store)
+            s[name] = item
+            s.close()
+        release_exclusive_lock(f)
 
 
 def get(name, file_store):
@@ -48,5 +64,8 @@ def get(name, file_store):
     :param file_store: The location of the store to read from.
     :return: Object, the item requested.
     """
-    with shelve.open(file_store, 'r') as f:
+    try:
+        f = shelve.open(file_store, 'r')
         return f[name]
+    finally:
+        f.close()
