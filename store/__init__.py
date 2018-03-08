@@ -1,1 +1,1 @@
-from store import get, put
+from store.store import get, put
