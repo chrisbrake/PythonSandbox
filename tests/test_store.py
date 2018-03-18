@@ -1,9 +1,6 @@
 from os import remove
-from sys import path
 from tempfile import mkstemp
 from unittest import TestCase
-
-path.append('../')
 
 from store import store
 

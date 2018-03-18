@@ -9,7 +9,8 @@ store_thread_lock = threading.Lock()
 
 def get_exclusive_lock(file_handle, timeout=None):
     """
-    Get an exclusive lock so other processes will not mess with your file handle.
+    Get an exclusive lock so other processes will not mess with your file
+    handle.
     :param file_handle: The open file you want to have an exclusive lock on.
     :param timeout: The max time to wait before giving up.
     :return: None
@@ -25,7 +26,8 @@ def get_exclusive_lock(file_handle, timeout=None):
             return
         except IOError as e:
             if e.errno != errno.EAGAIN:
-                raise  # Exceptions for reasons other than file lock will be raised
+                raise
+                # Exceptions for reasons other than file lock will be raised
             time.sleep(0.1)
     raise IOError(errno.EAGAIN, 'Could not get file lock')
 
@@ -33,7 +35,7 @@ def get_exclusive_lock(file_handle, timeout=None):
 def release_exclusive_lock(file_handle):
     """
     Release exclusive lock
-    :param file_handle: The open file you want to release the exclusive lock on.
+    :param file_handle: The open file you want to release the exclusive lock on
     :return: None
     """
     fcntl.flock(file_handle, fcntl.LOCK_UN)
