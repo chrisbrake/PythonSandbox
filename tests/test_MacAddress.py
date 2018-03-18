@@ -1,6 +1,4 @@
-from sys import path
 from unittest import TestCase
-path.append('../')
 from MacAddress import Mac
 
 
