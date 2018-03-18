@@ -1,9 +1,7 @@
 import unittest
 from hypothesis import given, settings
 from hypothesis.strategies import text
-from sys import getsizeof, path
-
-path.append('../')
+from sys import getsizeof
 from compressStr import compress_string, decompress_string
 
 
