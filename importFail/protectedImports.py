@@ -11,4 +11,5 @@ def impossible():
 
 
 def bomb():
-    raise NotImplementedError("%s is not supported on this platform" % __file__)
+    raise NotImplementedError(
+        "%s is not supported on this platform" % __file__)
