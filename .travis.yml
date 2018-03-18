@@ -4,12 +4,6 @@ notfications:
   email:
     on_success: never
     on_failure: never
-  pushover:
-    on_success: always
-    on_failure: always
-    api_key: a2d9pgrzf85a9obtt8mypn4ch3wew9
-    users:
-      - g8dir6o3fif7hvvb48fxgyhk89urqi
 
 language: python
 
