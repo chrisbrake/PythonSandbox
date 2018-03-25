@@ -1,7 +1,4 @@
-from sys import path
 from unittest import main, TestCase
-
-path.append('../')
 
 
 class TestImportFail(TestCase):
