@@ -7,8 +7,6 @@ def keys_and_values_are_strings(d):
     :param d: The Dictionary to check
     :return: Boolean, True if all the keys and values are strings.
     """
-    if not d:
-        return False
     schema = {
         'a_dict': {
             'keyschema': {'type': 'string'},
