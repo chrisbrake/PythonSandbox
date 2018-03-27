@@ -4,3 +4,4 @@ pbr
 six
 bottle
 cerberus
+gunicorn
