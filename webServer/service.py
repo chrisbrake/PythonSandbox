@@ -4,7 +4,7 @@ from cerberus import Validator
 
 
 gunicorn_config = [('bind', '127.0.0.1:8080'), ('workers', 1)]
-schema = {'name': {'type': 'string', 'required': True}}
+validator_schema = {'name': {'type': 'string', 'required': True}}
 
 
 class WebApplication(gunicorn.app.base.BaseApplication):
@@ -29,7 +29,7 @@ class RootResource(object):
 
     def __init__(self):
         self.items = list()
-        self.validator = Validator(schema, allow_unknown=True)
+        self.validator = Validator(validator_schema, allow_unknown=True)
 
     def on_get(self, request, response):
         """Handles GET requests"""
