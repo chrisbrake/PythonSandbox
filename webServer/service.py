@@ -23,6 +23,9 @@ class WebApplication(gunicorn.app.base.BaseApplication):
     def load(self):
         return self.application
 
+    def init(self, parser, opts, args):
+        pass
+
 
 if __name__ == '__main__':
     config = [
