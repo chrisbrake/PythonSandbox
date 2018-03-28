@@ -1,10 +1,13 @@
 import falcon
 import gunicorn.app.base
+from cerberus import Validator
+
 
 gunicorn_config = [
         ('bind', '127.0.0.1:8080'),
         ('workers', 1),
     ]
+schema = {'name': {'type': 'string', 'required': True}}
 
 
 class WebApplication(gunicorn.app.base.BaseApplication):
@@ -25,12 +28,26 @@ class WebApplication(gunicorn.app.base.BaseApplication):
         pass
 
 
-class RootResource:
+class RootResource(object):
 
-    @staticmethod
-    def on_get(request, response):
+    def __init__(self):
+        self.items = list()
+        self.validator = Validator(schema, allow_unknown=True)
+
+    def on_get(self, request, response):
         """Handles GET requests"""
-        response.media = {'Hello World': 'Most generic message ever'}
+        response.media = self.items
+
+    def on_post(self, request, response):
+        """ Handles POST requests"""
+        data = request.media
+        if not self.validator.validate(data):
+            response.status = falcon.HTTP_400
+            response.media = self.validator.errors
+            return
+        self.items.append(data)
+        response.status = falcon.HTTP_200
+        response.body = 'Thank you'
 
 
 def main():
