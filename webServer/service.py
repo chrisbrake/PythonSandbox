@@ -1,18 +1,16 @@
-import multiprocessing
+import falcon
 import gunicorn.app.base
 
-
-def main(environ, start_response):
-    status = '200 OK'
-    response_headers = [('Content-Type', 'text/plain')]
-    start_response(status, response_headers)
-    return [bytes(str(environ), 'utf-8')]
+gunicorn_config = [
+        ('bind', '127.0.0.1:8080'),
+        ('workers', 1),
+    ]
 
 
 class WebApplication(gunicorn.app.base.BaseApplication):
 
-    def __init__(self, app, options=None):
-        self.options = options or {}
+    def __init__(self, app, options):
+        self.options = options
         self.application = app
         super(WebApplication, self).__init__()
 
@@ -27,10 +25,19 @@ class WebApplication(gunicorn.app.base.BaseApplication):
         pass
 
 
-if __name__ == '__main__':
-    config = [
-        ('bind', '%s:%s' % ('127.0.0.1', '8080')),
-        ('workers', multiprocessing.cpu_count()),
-    ]
+class RootResource:
 
-    WebApplication(main, config).run()
+    @staticmethod
+    def on_get(request, response):
+        """Handles GET requests"""
+        response.media = {'Hello World': 'Most generic message ever'}
+
+
+def main():
+    api = falcon.API()
+    api.add_route('/', RootResource())
+    WebApplication(api, gunicorn_config).run()
+
+
+if __name__ == '__main__':
+    main()
