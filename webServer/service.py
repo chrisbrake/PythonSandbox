@@ -4,7 +4,8 @@ from cerberus import Validator
 
 
 gunicorn_config = [('bind', '127.0.0.1:8080'), ('workers', 1)]
-validator_schema = {'name': {'type': 'string', 'required': True}}
+validator_schema = {'name': {'type': 'string', 'required': True},
+                    'age': {'type': 'integer'}}
 
 
 class WebApplication(gunicorn.app.base.BaseApplication):
