@@ -3,10 +3,7 @@ import gunicorn.app.base
 from cerberus import Validator
 
 
-gunicorn_config = [
-        ('bind', '127.0.0.1:8080'),
-        ('workers', 1),
-    ]
+gunicorn_config = [('bind', '127.0.0.1:8080'), ('workers', 1)]
 schema = {'name': {'type': 'string', 'required': True}}
 
 
