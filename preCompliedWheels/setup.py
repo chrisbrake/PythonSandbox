@@ -1,5 +1,5 @@
 from setuptools import find_packages, setup
-from preCompliedWheels.package import Package
+from package import Package
 
 setup(
     name='sampleproject',
