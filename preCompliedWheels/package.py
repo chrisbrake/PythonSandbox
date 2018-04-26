@@ -89,7 +89,7 @@ class Package(Command):
         return_code = process.poll()
 
         if return_code != 0:
-            print(f"Error running command {command} - exit code: {return_code}")
+            print(f"Error running command {command} exit code: {return_code}")
             raise IOError("Shell Commmand Failed")
 
         return return_code
