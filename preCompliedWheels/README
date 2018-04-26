@@ -1,0 +1,4 @@
+# Build precomplied wheels
+```
+python setup.py package
+```
