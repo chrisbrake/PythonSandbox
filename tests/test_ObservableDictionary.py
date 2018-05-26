@@ -1,4 +1,3 @@
-import json
 from mock import Mock
 from unittest import TestCase
 from observableDictionary.observableDictionary import ObservableDictionary

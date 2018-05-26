@@ -21,7 +21,7 @@ class ObservableDictionary(MutableMapping):
     def remove_observer(self, observer):
         """
         Remove an observer from this instance of this data structure.
-        :param observer: The method to remove, so it will no longer be notified.
+        :param observer: The method to remove, so it will no longer be notified
         """
         try:
             self.observers.remove(observer)
