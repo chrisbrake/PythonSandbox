@@ -1,3 +1,4 @@
+import json
 from mock import Mock
 from unittest import TestCase
 from observableDictionary.observableDictionary import ObservableDictionary
@@ -77,3 +78,15 @@ class TestObservableDictionary(TestCase):
         o_dict.update(test_data)
         mock_method.assert_called_once_with(o_dict)
         self.assertDictEqual({'key': 'value', 'a': 'b'}, dict(o_dict))
+
+    def test_dict_conversion(self):
+        """ Test conversion to a standard dictionary """
+        o_dict = ObservableDictionary()
+        o_dict['key'] = 'value'
+        self.assertDictEqual({"key": "value"}, o_dict.as_dict())
+
+    def test_json_conversion(self):
+        """ Test conversion to a JSON string """
+        o_dict = ObservableDictionary()
+        o_dict['key'] = 'value'
+        self.assertEqual('{"key": "value"}', o_dict.as_json())

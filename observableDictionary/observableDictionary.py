@@ -1,3 +1,4 @@
+import json
 from collections.abc import MutableMapping
 
 
@@ -34,6 +35,20 @@ class ObservableDictionary(MutableMapping):
         """
         for observer in self.observers:
             observer(self)
+
+    def as_json(self):
+        """
+        Converts the data stored in this object to a json string.
+        :return: String, JSON compatible
+        """
+        return json.dumps(self.as_dict())
+
+    def as_dict(self):
+        """
+        Converts the data stored in this object to a standard dictionary.
+        :return: Dictionary
+        """
+        return self._dict
 
     def __init__(self, *args, **kwargs):
         self.observers = set()
