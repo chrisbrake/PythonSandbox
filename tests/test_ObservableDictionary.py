@@ -3,7 +3,7 @@ from unittest import TestCase
 from observableDictionary.observableDictionary import ObservableDictionary
 
 
-class TestMacAddress(TestCase):
+class TestObservableDictionary(TestCase):
 
     def test_basic_init(self):
         """ Confirm we can initialise successfully """
