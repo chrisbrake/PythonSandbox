@@ -2,7 +2,7 @@ from behave import given, when, then
 
 
 @given('we have behave installed')
-def step_impl(context):
+def step_installed(context):
     pass
 
 
@@ -13,6 +13,6 @@ def step_impl(context, number):
 
 
 @then('behave will test them for us!')
-def step_impl(context):
+def step_run(context):
     assert context.failed is False
     assert context.tests_count >= 0

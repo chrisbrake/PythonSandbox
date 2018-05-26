@@ -1,0 +1,9 @@
+hypothesis
+mock
+pbr
+six
+bottle
+cerberus
+gunicorn
+falcon
+rrdtool
