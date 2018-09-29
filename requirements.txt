@@ -7,3 +7,4 @@ cerberus
 gunicorn
 falcon
 behave
+nuitka
