@@ -5,7 +5,7 @@ Basic compile
 
     python -m nuitka --follow-imports compileMe.py
 
-This will give you a single .bin file.  It depends on a compatible CPython being installed.
+This will give you a single .bin file.  It depends on a compatible CPython being installed, but has your requirements bundled.
 
 This 79 byte Python example file becomes 161 kB
 
