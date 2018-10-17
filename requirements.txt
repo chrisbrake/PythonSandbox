@@ -8,3 +8,4 @@ gunicorn
 falcon
 behave
 nuitka
+sqlalchemy
