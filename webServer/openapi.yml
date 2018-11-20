@@ -1,0 +1,19 @@
+openapi: "3.0.1"
+info:
+  title: "Simple example"
+  version: "1"
+servers:
+- url: "http://localhost:8080/v1"
+paths:
+  /:
+    post:
+      summary: "Simple POST with free form body"
+      operationId: "openapi.echo"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+      responses:
+        200:
+          description: "OK"
