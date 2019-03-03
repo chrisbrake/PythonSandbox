@@ -18,7 +18,7 @@ class TestMacAddress(TestCase):
         ]
 
     def test_basic_init(self):
-        """Confirm the class can be initialised."""
+        """Confirm the classes can be initialised."""
         for mac_format in self.supported_formats:
             mac = Mac(mac_format)
             self.assertIsInstance(mac, Mac)

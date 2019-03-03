@@ -25,7 +25,7 @@ class Mac(object):
 
     def __init__(self, mac_raw):
         """
-        Initialize the class.
+        Initialize the classes.
         :param mac_raw: String, should contain a mac address.
             Any delimiters will be discarded.
         """
@@ -55,10 +55,10 @@ class Mac(object):
 
     def __eq__(self, other):
         """
-        Override the standard class equality method to provide a more
+        Override the standard classes equality method to provide a more
         accurate comparison.
         :param other: The object to compare against.
-        :return: Boolean, True if both are instances of the same class and
+        :return: Boolean, True if both are instances of the same classes and
             have the same content in their mac attributes. Otherwise False.
         """
         if isinstance(other, self.__class__):
@@ -67,10 +67,10 @@ class Mac(object):
 
     def __ne__(self, other):
         """
-        Override the standard class inequality method to provide a more
+        Override the standard classes inequality method to provide a more
         accurate comparison.
         :param other: The object to compare against.
-        :return: Boolean, False if both are instances of the same class and
+        :return: Boolean, False if both are instances of the same classes and
             have the same content in their mac attributes. Otherwise True.
         """
         return not self.__eq__(other)
