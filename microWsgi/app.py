@@ -1,5 +1,11 @@
 import falcon
 
+"""
+uwsgi --module "microWsgi.app:assemble()" --http :5050
+
+curl -s http://localhost:5050 | python -m 'json.tool'
+"""
+
 
 def ready(req, resp):
     return {"ready": "yes"}
