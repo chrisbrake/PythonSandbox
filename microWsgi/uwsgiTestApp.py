@@ -2,9 +2,14 @@ import logging
 import falcon
 from . import db
 """
-uwsgi --module "microWsgi.app:assemble()" --http :5050
+Server:
+uwsgi --module "microWsgi.uwsgiTestApp:assemble()" --http :5050 --stats :5051 
 
+Client:
 curl -s 'http://localhost:5050?test=potatoes' | python -m 'json.tool'
+
+Stats:
+curl -s 'http://localhost:5051' | python -m 'json.tool'
 """
 logging.basicConfig(level=logging.DEBUG)
 
