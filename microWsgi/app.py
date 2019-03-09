@@ -4,7 +4,7 @@ from . import db
 """
 uwsgi --module "microWsgi.app:assemble()" --http :5050
 
-curl -s http://localhost:5050 | python -m 'json.tool'
+curl -s 'http://localhost:5050?test=potatoes' | python -m 'json.tool'
 """
 logging.basicConfig(level=logging.DEBUG)
 
