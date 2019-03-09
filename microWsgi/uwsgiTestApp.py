@@ -17,9 +17,9 @@ nc -U stats.socket | python -m 'json.tool'
 logging.basicConfig(level=logging.DEBUG)
 
 
-def status(req, resp):
+def ready(req, resp):
     """ Proof of life """
-    return {"status": "ready"}
+    return {"ready": "yes"}
 
 
 def params(req, resp):
@@ -47,7 +47,7 @@ class Tester(object):
         'db': db.diag,
         'stats': stats,
         'params': params,
-        'status': status,
+        'ready': ready,
     }
 
     def on_get(self, req, resp, resource):
