@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 def ready(req, resp):
     """ Proof of life """
-    return {"ready": "yes"}
+    return "yes"
 
 
 def params(req, resp):
