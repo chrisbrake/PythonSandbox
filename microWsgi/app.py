@@ -1,6 +1,6 @@
 import logging
 import falcon
-
+from . import db
 """
 uwsgi --module "microWsgi.app:assemble()" --http :5050
 
@@ -9,7 +9,7 @@ curl -s http://localhost:5050 | python -m 'json.tool'
 logging.basicConfig(level=logging.DEBUG)
 
 
-def ready(req, resp):
+def status(req, resp):
     return {"status": "ready"}
 
 
@@ -20,7 +20,8 @@ def params(req, resp):
 class Tester(object):
 
     tests = {
-        'ready': ready,
+        'db': db.diag,
+        'status': status,
         'params': params,
     }
 
