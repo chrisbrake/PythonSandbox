@@ -1,15 +1,18 @@
+import json
 import logging
+import socket
 import falcon
 from . import db
+
 """
 Server:
-uwsgi --module "microWsgi.uwsgiTestApp:assemble()" --http :5050 --stats :5051 
+uwsgi --module "microWsgi.uwsgiTestApp:assemble()" --http :5050 --stats stats.socket 
 
 Client:
 curl -s 'http://localhost:5050?test=potatoes' | python -m 'json.tool'
 
 Stats:
-curl -s 'http://localhost:5051' | python -m 'json.tool'
+nc -U stats.socket | python -m 'json.tool'
 """
 logging.basicConfig(level=logging.DEBUG)
 
@@ -24,11 +27,25 @@ def params(req, resp):
     return req.params
 
 
+def stats(req, resp):
+    """ uwsgi's stats """
+    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    sock.connect('./stats.socket')
+
+    diag = b''
+    part = b''
+    while part or not diag:
+        diag += part
+        part = sock.recv(16)
+    return json.loads(diag)
+
+
 class Tester(object):
     """ Sandbox """
 
     tests = {
         'db': db.diag,
+        'stats': stats,
         'params': params,
         'status': status,
     }
@@ -38,10 +55,6 @@ class Tester(object):
             resp.media = self.tests[resource](req, resp)
         else:
             resp.media = {k: v(req, resp) for k, v in self.tests.items()}
-        logging.debug('data: %s', resp.data)
-        logging.debug('media: %s', resp.media)
-        logging.debug('params: %s', req.params)
-        logging.debug('resource: %s', resource)
 
 
 def assemble():
