@@ -39,6 +39,8 @@ def session():
 
 
 def diag(req, resp):
-    logging.debug('tables %s', engine.table_names())
-    logging.debug('driver %s', engine.driver)
-    return {'driver': engine.driver}
+    """ Data about the state of the database """
+    return {
+        'driver': engine.driver,
+        'tables': engine.table_names()
+    }
