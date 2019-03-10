@@ -29,14 +29,13 @@ def params(req, resp):
 
 def stats(req, resp):
     """ uwsgi's stats """
-    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    sock.connect('./stats.socket')
-
+    stats_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    stats_socket.connect('stats.socket')
     diag = b''
     part = b''
     while part or not diag:
         diag += part
-        part = sock.recv(16)
+        part = stats_socket.recv(16)
     return json.loads(diag)
 
 
