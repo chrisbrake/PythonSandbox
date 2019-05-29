@@ -107,8 +107,11 @@ if __name__ == '__main__':
                     s.query(Order).join(User).filter_by(name='frankie').all())
 
     with session() as s:
-        response = s.query(Order, User).join(User.orders).all()
-        for i, r in enumerate(response):
-            order, user = r
+        for i, o in enumerate(s.query(Order).all()):
             logger.info(
-                "%d result: %s placed order %d", i, user.name, order.id)
+                "%d result: %s placed order %d", i, o.user.name, o.id)
+
+        for u in s.query(User).all():
+            logger.info(
+                "%s placed orders %s", u.name,
+                ', '.join([str(o.id) for o in u.orders]))
