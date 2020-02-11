@@ -34,4 +34,3 @@ def test_insert_list():
     db(PATH).purge_tables()
     db(PATH).insert_multiple(TEST_DATA)
     assert db(PATH).all() == TEST_DATA
-
