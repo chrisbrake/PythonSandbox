@@ -101,3 +101,5 @@ wheelhouse/
 # mypy
 .mypy_cache/
 .idea/
+/tests/tinydb.json
+/dbSetup/test.db
