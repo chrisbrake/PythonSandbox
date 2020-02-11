@@ -7,8 +7,8 @@ def db(path):
     """
     Get a handle for the data store.
 
-    :param path:
-    :return:
+    :param path: the location of the file to open
+    :return: the database
     """
     global _db
     if _db is None:
