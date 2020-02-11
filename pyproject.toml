@@ -10,7 +10,7 @@ home-page="https://github.com/chrisbrake/PythonSandbox"
 module = "debugify"
 requires = [
     "aiohttp", "behave", "bottle", "cerberus", "connexion", "falcon", "gunicorn", "hypothesis", "mock",
-    "nuitka", "pbr","requests", "responder", "six", "sqlalchemy", "uwsgi"
+    "nuitka", "pbr","requests", "responder", "six", "sqlalchemy", "tinydb", "trio", "uwsgi"
     ]
 
 [tool.flit.metadata.requires-extra]
