@@ -4,10 +4,10 @@ import tinydb
 PATH = 'tinydb.json'
 
 TEST_DATA = [
-    {'name': 'John', 'age': 22},
-    {'name': 'Ringo', 'age': 23},
-    {'name': 'Paul', 'age': 24},
-    {'name': 'Peter', 'age': 25}
+    {'name': 'John', 'age': 40},
+    {'name': 'Ringo', 'age': 79},
+    {'name': 'Paul', 'age': 77},
+    {'name': 'George', 'age': 58}
 ]
 
 
@@ -26,7 +26,7 @@ def test_selects():
 
     assert db(PATH).all() == TEST_DATA
     paul = db(PATH).search(tinydb.where('name') == 'Paul')
-    assert paul == [{'name': 'Paul', 'age': 24}]
+    assert paul == [{'name': 'Paul', 'age': 77}]
 
 
 def test_insert_list():
