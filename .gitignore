@@ -103,3 +103,4 @@ wheelhouse/
 .idea/
 /tests/tinydb.json
 /dbSetup/test.db
+/dbSetup/example.db
