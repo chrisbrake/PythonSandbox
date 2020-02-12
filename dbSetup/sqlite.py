@@ -40,6 +40,28 @@ cursor.executemany('''
 
 for row in cursor.execute('SELECT * FROM stocks ORDER BY price'):
     print(row)
+
+# Create a key-value data store
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS kvs (key, value)
+    ''')
+
+cursor.executemany('''
+    INSERT INTO kvs 
+    VALUES (?,?)
+    ''', [
+    ('2006-03-28', 45.00),
+    ('2006-04-05', 'BUY'),
+    ('2006-04-06', 500),
+    ]
+)
+
+# Save (commit) the changes again
+connection.commit()
+
+for row in cursor.execute('SELECT * FROM kvs'):
+    print(row)
+
 # We can also close the connection if we are done with it.
 # Just be sure any changes have been committed or they will be lost.
 connection.close()
